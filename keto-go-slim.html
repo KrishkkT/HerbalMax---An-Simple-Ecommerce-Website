@@ -55,8 +55,14 @@
       <img src="img/img7.jpg" alt="Healthy Body" class="product-img">
     </section>
 
-    <form class="checkout-form" method="POST" action="https://formspree.io/f/yourFormID">
+        <form class="checkout-form" method="POST" action="https://formspree.io/f/xnnbvzpp">
       <h3>ઓર્ડર કરો / Order Now</h3>
+
+      <!-- Offer Section -->
+      <div id="offer-box" class="offer-box">
+        <p id="offer-text" class="blink">🎉 ખાસ ઓફર - માત્ર <span class="discounted">₹1499</span> બદલે <span class="original">₹2999</span></p>
+        <p id="timer" class="timer"></p>
+      </div>
 
       <label>નામ / Name</label>
       <input type="text" name="name" required>
@@ -64,14 +70,112 @@
       <label>મોબાઈલ નંબર / Phone</label>
       <input type="tel" name="phone" maxlength="10" required>
 
-      <label>ઈમેઇલ / Email</label>
-      <input type="email" name="email" required>
-
       <label>સરનામું / Address</label>
       <textarea name="address" rows="3" required></textarea>
 
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
+
+    <script>
+  const offerBox = document.getElementById("offer-box");
+  const offerText = document.getElementById("offer-text");
+  const timerEl = document.getElementById("timer");
+
+  // Config
+  const offerDuration = 15 * 60 * 1000; // 15 min in ms
+  const gapDuration = 60 * 60 * 1000;   // 1 hr in ms
+
+  function getState() {
+    const saved = localStorage.getItem("offerState");
+    if (saved) return JSON.parse(saved);
+    return null;
+  }
+
+  function setState(state) {
+    localStorage.setItem("offerState", JSON.stringify(state));
+  }
+
+  function startOfferCycle() {
+    let state = getState();
+
+    if (!state) {
+      state = {
+        offerActive: true,
+        endTime: Date.now() + offerDuration
+      };
+      setState(state);
+    }
+
+    function updateTimer() {
+      let now = Date.now();
+      let remaining = state.endTime - now;
+
+      if (remaining <= 0) {
+        // switch state
+        if (state.offerActive) {
+          state.offerActive = false;
+          state.endTime = now + gapDuration;
+          offerText.innerHTML = "⏳ નવી ઓફર જલ્દી જ શરૂ થશે...";
+        } else {
+          state.offerActive = true;
+          state.endTime = now + offerDuration;
+          offerText.innerHTML = "🔥 ખાસ ઓફર - માત્ર <span class='discounted'>₹1499</span> બદલે <span class='original'>₹2999</span>";
+        }
+        setState(state);
+        remaining = state.endTime - now;
+      }
+
+      let minutes = Math.floor((remaining / 1000) / 60);
+      let seconds = Math.floor((remaining / 1000) % 60);
+
+      if (state.offerActive) {
+        timerEl.textContent = `⏳ ઓફર પૂરી થશે: ${minutes} મિનિટ ${seconds} સેકંડ માં`;
+      } else {
+        timerEl.textContent = `🔒 ડિસ્કાઉન્ટ બંધ છે. નવી ઓફર ${minutes} મિનિટ ${seconds} સેકંડ માં આવશે.`;
+      }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  }
+
+  startOfferCycle();
+</script>
+
+
+    <style>
+      .offer-box {
+        background: #fff3cd;
+        border: 2px solid #ffcc00;
+        padding: 12px;
+        margin-bottom: 15px;
+        text-align: center;
+        border-radius: 10px;
+      }
+      .blink {
+        font-weight: bold;
+        color: #d9534f;
+        animation: blink 1s infinite;
+      }
+      .discounted {
+        color: #28a745;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      .original {
+        text-decoration: line-through;
+        color: #999;
+      }
+      .timer {
+        margin-top: 8px;
+        font-size: 0.95em;
+        color: #333;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+    </style>
+
   </main>
 
   <footer class="footer">
