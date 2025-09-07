@@ -98,3 +98,31 @@ body {
     background: #ecf0f1;
   }
   
+
+  .customer-celebration {
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  text-align: center;
+  padding: 25px 15px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.customer-celebration h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #d9534f;
+  margin-bottom: 10px;
+  animation: bounce 1.5s infinite;
+}
+
+.customer-celebration p {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: 500;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

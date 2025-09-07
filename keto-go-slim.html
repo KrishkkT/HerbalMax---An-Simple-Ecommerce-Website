@@ -55,126 +55,134 @@
       <img src="img/img7.jpg" alt="Healthy Body" class="product-img">
     </section>
 
-        <form class="checkout-form" method="POST" action="https://formspree.io/f/xnnbvzpp">
-      <h3>ઓર્ડર કરો / Order Now</h3>
+        <form class="checkout-form" method="POST" action="https://formspree.io/f/xeolvkeo">
+  <h3>ઓર્ડર કરો / Order Now</h3>
 
-      <!-- Offer Section -->
-      <div id="offer-box" class="offer-box">
-        <p id="offer-text" class="blink">🎉 ખાસ ઓફર - માત્ર <span class="discounted">₹1499</span> બદલે <span class="original">₹2999</span></p>
-        <p id="timer" class="timer"></p>
-      </div>
+  <!-- Hidden fields for email formatting -->
+  <input type="hidden" name="_subject" value="🟢 New Order - Keto Go Slim">
+  <input type="hidden" name="_template" value="table">
 
-      <label>નામ / Name</label>
-      <input type="text" name="name" required>
+  <!-- Offer Section -->
+  <div id="offer-box" class="offer-box">
+    <p class="price-line">
+      <span class="original">₹3160</span> ➝ 
+      <span class="discounted">₹1580</span>
+    </p>
+    <p class="offer-highlight">🔥 50% OFF 🔥</p>
+    <p id="timer" class="timer"></p>
+  </div>
 
-      <label>મોબાઈલ નંબર / Phone</label>
-      <input type="tel" name="phone" maxlength="10" required>
+  <label>નામ / Name</label>
+  <input type="text" name="Customer Name" required>
 
-      <label>સરનામું / Address</label>
-      <textarea name="address" rows="3" required></textarea>
+  <label>મોબાઈલ નંબર / Phone</label>
+  <input type="tel" name="Phone Number" maxlength="10" required>
 
-      <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
-    </form>
+  <label>સરનામું / Address</label>
+  <textarea name="Address" rows="3" required></textarea>
+
+  <label> પિનકોડ / Pincode</label>
+  <input type="number" name="Pincode" required>
+
+  <!-- Branding note in email -->
+  <input type="hidden" name="Product" value="Keto Go Slim - Herbal Max Plus">
+  <input type="hidden" name="Offer Price" value="₹1580">
+  <input type="hidden" name="Original Price" value="₹3160">
+
+  <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
+</form>
+
 
     <script>
-  const offerBox = document.getElementById("offer-box");
-  const offerText = document.getElementById("offer-text");
-  const timerEl = document.getElementById("timer");
+    const timerEl = document.getElementById("timer");
+    const offerDuration = 60 * 60 * 1000; // 1 hr in ms
 
-  // Config
-  const offerDuration = 15 * 60 * 1000; // 15 min in ms
-  const gapDuration = 60 * 60 * 1000;   // 1 hr in ms
-
-  function getState() {
-    const saved = localStorage.getItem("offerState");
-    if (saved) return JSON.parse(saved);
-    return null;
-  }
-
-  function setState(state) {
-    localStorage.setItem("offerState", JSON.stringify(state));
-  }
-
-  function startOfferCycle() {
-    let state = getState();
-
-    if (!state) {
-      state = {
-        offerActive: true,
-        endTime: Date.now() + offerDuration
-      };
-      setState(state);
+    function getState() {
+      const saved = localStorage.getItem("offerStateV2");
+      if (saved) return JSON.parse(saved);
+      return null;
     }
 
-    function updateTimer() {
-      let now = Date.now();
-      let remaining = state.endTime - now;
+    function setState(state) {
+      localStorage.setItem("offerStateV2", JSON.stringify(state));
+    }
 
-      if (remaining <= 0) {
-        // switch state
-        if (state.offerActive) {
-          state.offerActive = false;
-          state.endTime = now + gapDuration;
-          offerText.innerHTML = "⏳ નવી ઓફર જલ્દી જ શરૂ થશે...";
-        } else {
-          state.offerActive = true;
-          state.endTime = now + offerDuration;
-          offerText.innerHTML = "🔥 ખાસ ઓફર - માત્ર <span class='discounted'>₹1499</span> બદલે <span class='original'>₹2999</span>";
-        }
+    function startOfferCycle() {
+      let state = getState();
+
+      if (!state) {
+        state = { endTime: Date.now() + offerDuration };
         setState(state);
-        remaining = state.endTime - now;
       }
 
-      let minutes = Math.floor((remaining / 1000) / 60);
-      let seconds = Math.floor((remaining / 1000) % 60);
+      function updateTimer() {
+        let now = Date.now();
+        let remaining = state.endTime - now;
 
-      if (state.offerActive) {
-        timerEl.textContent = `⏳ ઓફર પૂરી થશે: ${minutes} મિનિટ ${seconds} સેકંડ માં`;
-      } else {
-        timerEl.textContent = `🔒 ડિસ્કાઉન્ટ બંધ છે. નવી ઓફર ${minutes} મિનિટ ${seconds} સેકંડ માં આવશે.`;
+        if (remaining <= 0) {
+          // Restart 1 hr
+          state.endTime = now + offerDuration;
+          setState(state);
+          remaining = offerDuration;
+        }
+
+        let minutes = Math.floor((remaining / 1000) / 60);
+        let seconds = Math.floor((remaining / 1000) % 60);
+
+        timerEl.textContent = `⏳ Offer ends in: ${minutes}m ${seconds}s`;
       }
+
+      setInterval(updateTimer, 1000);
+      updateTimer();
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
-  }
+    startOfferCycle();
+  </script>
 
-  startOfferCycle();
-</script>
-
-
-    <style>
-      .offer-box {
-        background: #fff3cd;
-        border: 2px solid #ffcc00;
-        padding: 12px;
-        margin-bottom: 15px;
-        text-align: center;
-        border-radius: 10px;
-      }
-      .blink {
-        font-weight: bold;
-        color: #d9534f;
-        animation: blink 1s infinite;
-      }
-      .discounted {
-        color: #28a745;
-        font-size: 1.2em;
-        font-weight: bold;
-      }
-      .original {
-        text-decoration: line-through;
-        color: #999;
-      }
-      .timer {
-        margin-top: 8px;
-        font-size: 0.95em;
-        color: #333;
-      }
-      @keyframes blink {
-        50% { opacity: 0; }
-      }
-    </style>
+  <style>
+    .offer-box {
+      background: #fff3cd;
+      border: 2px solid #ffcc00;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      border-radius: 12px;
+    }
+    .price-line {
+      font-size: 1.4em;
+      margin: 0;
+    }
+    .original {
+      text-decoration: line-through;
+      color: red;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+    .discounted {
+      color: #28a745;
+      font-size: 1.6em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .offer-highlight {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #d9534f;
+      margin: 8px 0;
+      animation: pulse 1s infinite;
+    }
+    .timer {
+      margin-top: 8px;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #333;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); color: #d9534f; }
+      50% { transform: scale(1.1); color: #ff0000; }
+      100% { transform: scale(1); color: #d9534f; }
+    }
+  </style>
 
   </main>
 
