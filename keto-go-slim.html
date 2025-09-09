@@ -103,7 +103,7 @@
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
 
-     <script>
+    <script>
       document.querySelector(".checkout-form").addEventListener("submit", async function (e) {
         const form = e.target;
 
@@ -112,11 +112,10 @@
         const discountedPrice = document.getElementById("discounted-price");
         const hiddenPrice = document.getElementById("hidden-offer-price");
 
-        // Default price
         let finalPrice = "₹1280";
 
         if (couponInput.toUpperCase() === "HEALTH15") {
-          finalPrice = "₹1088"; // 15% OFF
+          finalPrice = "₹1088";
           if (discountedPrice) discountedPrice.textContent = finalPrice + " (after coupon)";
           if (hiddenPrice) hiddenPrice.value = finalPrice;
           alert("✅ Coupon applied successfully! You saved 15%.");
@@ -126,7 +125,7 @@
           return false;
         }
 
-        // Build EspoCRM Lead payload
+        // Prepare EspoCRM payload
         const payload = {
           firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
           lastName: "HerbalMax",
@@ -145,7 +144,7 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "052659b26e983284a466b8496b92e32a"  
+              "Authorization": "Bearer 052659b26e983284a466b8496b92e32a"  // <-- Use Bearer!
             },
             body: JSON.stringify(payload)
           });
@@ -159,10 +158,9 @@
         } catch (err) {
           console.error("⚠️ Error connecting to EspoCRM:", err);
         }
-
-        // Don't preventDefault → Formspree email still goes through
       });
     </script>
+
 
 
 
