@@ -109,9 +109,11 @@
     </form>
 
     <script>
-      document.getElementById("orderForm").addEventListener("submit", async function (e) {
+      document.querySelector(".checkout-form").addEventListener("submit", async function (e) {
         const form = e.target;
-        const couponInput = document.getElementById("coupon").value.trim();
+
+        // Coupon handling
+        const couponInput = document.getElementById("coupon")?.value.trim() || "";
         const discountedPrice = document.getElementById("discounted-price");
         const hiddenPrice = document.getElementById("hidden-offer-price");
 
@@ -120,27 +122,27 @@
 
         if (couponInput.toUpperCase() === "HEALTH15") {
           finalPrice = "₹1088"; // 15% OFF
-          discountedPrice.textContent = finalPrice + " (after coupon)";
-          hiddenPrice.value = finalPrice;
+          if (discountedPrice) discountedPrice.textContent = finalPrice + " (after coupon)";
+          if (hiddenPrice) hiddenPrice.value = finalPrice;
           alert("✅ Coupon applied successfully! You saved 15%.");
         } else if (couponInput !== "") {
-          e.preventDefault(); // Stop submit
+          e.preventDefault();
           alert("❌ Invalid Coupon Code. Please try again.");
           return false;
         }
 
-        // Prepare data for EspoCRM
-        const formData = {
-          firstName: form.querySelector('input[name="Customer Name"]').value,
+        // Build EspoCRM Lead payload
+        const payload = {
+          firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
           lastName: "HerbalMax",
-          phoneNumber: form.querySelector('input[name="Phone Number"]').value,
-          address: form.querySelector('textarea[name="Address"]').value,
-          pincode: form.querySelector('input[name="Pincode"]').value,
+          phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(),
+          addressStreet: form.querySelector('textarea[name="Address"]').value.trim(),
+          postalCode: form.querySelector('input[name="Pincode"]').value.trim(),
           description: "Order for " + form.querySelector('input[name="Product"]').value,
           product: form.querySelector('input[name="Product"]').value,
           price: finalPrice,
-          status: "New",         // CRM field
-          source: "Website"      // CRM field
+          status: "New",
+          source: "Website"
         };
 
         try {
@@ -148,21 +150,22 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "Basic " + btoa("apiuser:StrongPassword123")
+              "Authorization": "052659b26e983284a466b8496b92e32a"  
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(payload)
           });
 
           if (response.ok) {
-            console.log("✅ Order also saved to CRM.");
+            console.log("✅ Lead created in EspoCRM successfully.");
           } else {
-            console.error("❌ Failed to save to CRM:", await response.text());
+            const errText = await response.text();
+            console.error("❌ Failed to create lead:", errText);
           }
         } catch (err) {
-          console.error("⚠️ Error connecting to CRM:", err);
+          console.error("⚠️ Error connecting to EspoCRM:", err);
         }
 
-        // Let Formspree send email
+        // Don't preventDefault → Formspree email still goes through
       });
     </script>
 
