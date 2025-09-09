@@ -117,10 +117,11 @@
         const discountedPrice = document.getElementById("discounted-price");
         const hiddenPrice = document.getElementById("hidden-offer-price");
 
+        // Default price
         let finalPrice = "₹1280";
 
         if (couponInput.toUpperCase() === "HEALTH15") {
-          finalPrice = "₹1088";
+          finalPrice = "₹1088"; // 15% OFF
           if (discountedPrice) discountedPrice.textContent = finalPrice + " (after coupon)";
           if (hiddenPrice) hiddenPrice.value = finalPrice;
           alert("✅ Coupon applied successfully! You saved 15%.");
@@ -130,11 +131,16 @@
           return false;
         }
 
-        // Prepare EspoCRM payload
+        // Build EspoCRM Lead payload
         const payload = {
           firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
           lastName: "HerbalMax",
-          phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(),
+          phones: [
+            {
+              phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(),
+              type: "Mobile"
+            }
+          ],
           addressStreet: form.querySelector('textarea[name="Address"]').value.trim(),
           postalCode: form.querySelector('input[name="Pincode"]').value.trim(),
           description: "Order for " + form.querySelector('input[name="Product"]').value,
@@ -149,7 +155,7 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "Bearer 052659b26e983284a466b8496b92e32a"  // <-- Use Bearer!
+              "X-Api-Key": "052659b26e983284a466b8496b92e32a"
             },
             body: JSON.stringify(payload)
           });
@@ -163,8 +169,11 @@
         } catch (err) {
           console.error("⚠️ Error connecting to EspoCRM:", err);
         }
+
+        // ⚠️ Don’t preventDefault → Formspree email still goes through
       });
     </script>
+
 
 
 
