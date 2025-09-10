@@ -67,7 +67,7 @@
       <img src="img/img15.jpg" alt="Strength" class="product-img">
     </section>
 
-    <form id="orderForm" class="checkout-form" method="POST" action="https://formspree.io/f/xeolvkeo">
+    <form id="orderForm" class="checkout-form" method="POST" action="https://herbalmaxplus.shop/lead-proxy.php">
       <h3>ઓર્ડર કરો / Order Now</h3>
 
       <!-- Hidden fields for email branding -->
@@ -106,64 +106,29 @@
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
 
-    <script>
-      document.querySelector(".checkout-form").addEventListener("submit", async function (e) {
-        const form = e.target;
-
-        // Coupon handling
-        const couponInput = document.getElementById("coupon")?.value.trim() || "";
-        const discountedPrice = document.getElementById("discounted-price");
-        const hiddenPrice = document.getElementById("hidden-offer-price");
-
-        let finalPrice = "₹1280"; // Default price
-
-        if (couponInput.toUpperCase() === "HEALTH15") {
-          finalPrice = "₹1088"; // 15% OFF
-          if (discountedPrice) discountedPrice.textContent = finalPrice + " (after coupon)";
-          if (hiddenPrice) hiddenPrice.value = finalPrice;
-          alert("✅ Coupon applied successfully! You saved 15%.");
-        } else if (couponInput !== "") {
-          e.preventDefault();
-          alert("❌ Invalid Coupon Code. Please try again.");
-          return false;
-        }
-
-        // Build EspoCRM Lead payload
-        const payload = {
-          firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
-          lastName: "HerbalMax",
-          phones: [
-            { phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(), type: "Mobile" }
-          ],
-          addressStreet: form.querySelector('textarea[name="Address"]').value.trim(),
-          postalCode: form.querySelector('input[name="Pincode"]').value.trim(),
-          description: "Order for " + form.querySelector('input[name="Product"]').value,
-          product: form.querySelector('input[name="Product"]').value,
-          price: finalPrice,
-          status: "New",
-          source: "Website"
-        };
-
-        try {
-          // ✅ Use HTTPS to avoid mixed content
-          const response = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          if (response.ok) {
-            console.log("✅ Lead created in EspoCRM successfully.");
-          } else {
-            const errText = await response.text();
-            console.error("❌ Failed to create lead:", errText);
-          }
-        } catch (err) {
-          console.error("⚠️ Error connecting to EspoCRM:", err);
-        }
-        // Don’t preventDefault → Formspree email still goes through
-      });
-    </script>
+   <script>
+document.getElementById('orderForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    firstName: form.firstName.value,
+    lastName: "HerbalMax",
+    phone: form.phone.value,
+    address: form.address.value,
+    pincode: form.pincode.value,
+    product: form.product.value,
+    price: form.price.value
+  };
+  const res = await fetch(form.action, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  const json = await res.json();
+  console.log(json);
+  alert("✅ Order submitted successfully!");
+});
+</script>
 
 
 
