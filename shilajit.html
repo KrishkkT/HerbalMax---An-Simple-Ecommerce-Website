@@ -119,11 +119,12 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     product: form.product.value,
     price: form.price.value
   };
-  const res = await fetch(form.action, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  });
+  const res = await fetch("https://herbalmaxplus.shop/lead-proxy.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload)
+});
+
   const json = await res.json();
   console.log(json);
   alert("✅ Order submitted successfully!");
