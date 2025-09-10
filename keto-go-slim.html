@@ -141,12 +141,9 @@
 
         try {
           // ✅ Use HTTPS to avoid mixed content
-          const response = await fetch("https://herbalmaxplus.shop/api/v1/Lead", {
+          const response = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "X-Api-Key": "052659b26e983284a466b8496b92e32a"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
 
