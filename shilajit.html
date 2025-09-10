@@ -74,7 +74,6 @@
       <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Shilajit Capsule">
       <input type="hidden" name="_template" value="table">
 
-      <!-- Offer Section -->
       <div id="offer-box" class="offer-box">
         <p class="price-line">
           <span class="original">₹2560</span> ➝
@@ -96,7 +95,6 @@
       <label>પિનકોડ(વૈકલ્પિક) / Pincode(Optional)</label>
       <input type="number" name="Pincode">
 
-      <!-- Coupon Code -->
       <label>કૂપન કોડ / Coupon Code</label>
       <input type="text" id="coupon" placeholder="Enter Coupon (Optional)">
 
@@ -117,8 +115,7 @@
         const discountedPrice = document.getElementById("discounted-price");
         const hiddenPrice = document.getElementById("hidden-offer-price");
 
-        // Default price
-        let finalPrice = "₹1280";
+        let finalPrice = "₹1280"; // Default price
 
         if (couponInput.toUpperCase() === "HEALTH15") {
           finalPrice = "₹1088"; // 15% OFF
@@ -136,10 +133,7 @@
           firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
           lastName: "HerbalMax",
           phones: [
-            {
-              phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(),
-              type: "Mobile"
-            }
+            { phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(), type: "Mobile" }
           ],
           addressStreet: form.querySelector('textarea[name="Address"]').value.trim(),
           postalCode: form.querySelector('input[name="Pincode"]').value.trim(),
@@ -151,7 +145,8 @@
         };
 
         try {
-          const response = await fetch("http://3.111.169.51/api/v1/Lead", {
+          // ✅ Use HTTPS to avoid mixed content
+          const response = await fetch("https://herbalmaxplus.shop/api/v1/Lead", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -169,10 +164,10 @@
         } catch (err) {
           console.error("⚠️ Error connecting to EspoCRM:", err);
         }
-
-        // ⚠️ Don’t preventDefault → Formspree email still goes through
+        // Don’t preventDefault → Formspree email still goes through
       });
     </script>
+
 
 
 

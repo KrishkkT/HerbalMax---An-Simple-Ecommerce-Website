@@ -62,18 +62,17 @@
       <img src="img/img7.jpg" alt="Healthy Body" class="product-img">
     </section>
 
-    <form class="checkout-form" id="orderForm" method="POST" action="https://formspree.io/f/xeolvkeo">
+    <form id="orderForm" class="checkout-form" method="POST" action="https://formspree.io/f/xeolvkeo">
       <h3>ઓર્ડર કરો / Order Now</h3>
 
-      <!-- Hidden fields for email formatting -->
-      <input type="hidden" name="_subject" value="🟢 New Order - Keto Go Slim">
+      <!-- Hidden fields for email branding -->
+      <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Shilajit Capsule">
       <input type="hidden" name="_template" value="table">
 
-      <!-- Offer Section -->
       <div id="offer-box" class="offer-box">
         <p class="price-line">
-          <span class="original">₹3160</span> ➝
-          <span class="discounted" id="discounted-price">₹1580</span>
+          <span class="original">₹2560</span> ➝
+          <span id="discounted-price" class="discounted">₹1280</span>
         </p>
         <p class="offer-highlight">🔥 50% OFF 🔥</p>
         <p id="timer" class="timer"></p>
@@ -88,17 +87,16 @@
       <label>સરનામું / Address</label>
       <textarea name="Address" rows="3" required></textarea>
 
-      <label> પિનકોડ(વૈકલ્પિક) / Pincode(Optional)</label>
+      <label>પિનકોડ(વૈકલ્પિક) / Pincode(Optional)</label>
       <input type="number" name="Pincode">
 
-      <!-- Coupon Code -->
       <label>કૂપન કોડ / Coupon Code</label>
-      <input type="text" id="coupon" name="Coupon">
+      <input type="text" id="coupon" placeholder="Enter Coupon (Optional)">
 
-      <!-- Branding note in email -->
-      <input type="hidden" name="Product" value="Keto Go Slim - Herbal Max Plus">
-      <input type="hidden" name="Offer Price" id="hidden-offer-price" value="₹1580">
-      <input type="hidden" name="Original Price" value="₹3160">
+      <!-- Hidden values -->
+      <input type="hidden" name="Product" value="Herbal Max Plus - Shilajit Capsule">
+      <input type="hidden" id="hidden-offer-price" name="Offer Price" value="₹1280">
+      <input type="hidden" name="Original Price" value="₹2560">
 
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
@@ -112,8 +110,7 @@
         const discountedPrice = document.getElementById("discounted-price");
         const hiddenPrice = document.getElementById("hidden-offer-price");
 
-        // Default price
-        let finalPrice = "₹1280";
+        let finalPrice = "₹1280"; // Default price
 
         if (couponInput.toUpperCase() === "HEALTH15") {
           finalPrice = "₹1088"; // 15% OFF
@@ -131,10 +128,7 @@
           firstName: form.querySelector('input[name="Customer Name"]').value.trim(),
           lastName: "HerbalMax",
           phones: [
-            {
-              phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(),
-              type: "Mobile"
-            }
+            { phoneNumber: form.querySelector('input[name="Phone Number"]').value.trim(), type: "Mobile" }
           ],
           addressStreet: form.querySelector('textarea[name="Address"]').value.trim(),
           postalCode: form.querySelector('input[name="Pincode"]').value.trim(),
@@ -146,7 +140,8 @@
         };
 
         try {
-          const response = await fetch("http://3.111.169.51/api/v1/Lead", {
+          // ✅ Use HTTPS to avoid mixed content
+          const response = await fetch("https://herbalmaxplus.shop/api/v1/Lead", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -164,10 +159,10 @@
         } catch (err) {
           console.error("⚠️ Error connecting to EspoCRM:", err);
         }
-
-        // ⚠️ Don’t preventDefault → Formspree email still goes through
+        // Don’t preventDefault → Formspree email still goes through
       });
     </script>
+
 
 
 
