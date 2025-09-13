@@ -79,27 +79,25 @@
       </div>
 
       <label>નામ / Name</label>
-      <input type="text" name="Customer Name" required>
+      <input type="text" name="first_name" required>
 
       <label>મોબાઈલ નંબર / Phone</label>
-      <input type="tel" name="Phone Number" maxlength="10" required>
+      <input type="tel" name="phone" maxlength="10" required>
 
       <label>સરનામું / Address</label>
-      <textarea name="Address" rows="3" required></textarea>
+      <textarea name="address" rows="3" required></textarea>
 
       <label>પિનકોડ(વૈકલ્પિક) / Pincode(Optional)</label>
-      <input type="number" name="Pincode">
+      <input type="number" name="pincode">
 
-      <label>કૂપન કોડ / Coupon Code</label>
-      <input type="text" id="coupon" placeholder="Enter Coupon (Optional)">
+      <input type="hidden" name="product" value="Herbal Max Plus - Shilajit Capsule">
+      <input type="hidden" name="offer_price" value="1280">
 
-      <!-- Hidden values -->
-      <input type="hidden" name="Product" value="Herbal Max Plus - Shilajit Capsule">
-      <input type="hidden" id="hidden-offer-price" name="Offer Price" value="₹1280">
       <input type="hidden" name="Original Price" value="₹2560">
 
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
+
 
     <script>
       document.querySelector(".checkout-form").addEventListener("submit", async function (e) {
