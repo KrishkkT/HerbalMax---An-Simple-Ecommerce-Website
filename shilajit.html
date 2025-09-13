@@ -83,8 +83,11 @@
         <p id="timer" class="timer"></p>
       </div>
 
-      <label>નામ / Name</label>
+      <label>પ્રથમ નામ / First Name</label>
       <input type="text" name="first_name" required>
+
+      <label>અંતિમ નામ / Last Name</label>
+      <input type="text" name="last_name" required>
 
       <label>મોબાઈલ નંબર / Phone</label>
       <input type="tel" name="phone" maxlength="10" required>
@@ -97,25 +100,25 @@
 
       <input type="hidden" name="product" value="Herbal Max Plus - Shilajit Capsule">
       <input type="hidden" name="offer_price" value="1280">
-
-      <input type="hidden" name="Original Price" value="₹2560">
+      <input type="hidden" name="original_price" value="2560">
 
       <button type="submit" class="btn">હમણાં જ ઓર્ડર કરો / Submit Order</button>
     </form>
 
     <script>
       document.getElementById('orderForm').addEventListener('submit', async function (e) {
-        // Do not prevent default - Formspree still works
+        // Keep default so Formspree still works
         const form = e.target;
 
         const payload = {
           first_name: form.first_name.value,
-          last_name: "HerbalMax",
+          last_name: form.last_name.value,
           phone: form.phone.value,
           address: form.address.value,
           pincode: form.pincode.value,
           product: form.product.value,
-          offer_price: form.offer_price.value
+          offer_price: form.offer_price.value,
+          original_price: form.original_price.value
         };
 
         try {
@@ -131,6 +134,7 @@
         }
       });
     </script>
+
 
 
 
