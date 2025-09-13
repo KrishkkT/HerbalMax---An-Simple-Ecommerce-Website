@@ -67,7 +67,7 @@
       <img src="img/img15.jpg" alt="Strength" class="product-img">
     </section>
 
-    <form id="orderForm" class="checkout-form" method="POST" action="https://formspree.io/f/xeolvkeo">
+    <form id="orderForm" class="checkout-form" method="POST" action="https://formspree.io/f/xnnbvzpp">
       <h3>ઓર્ડર કરો / Order Now</h3>
 
       <!-- Hidden fields for email branding -->
@@ -105,6 +105,7 @@
 
     <script>
       document.getElementById('orderForm').addEventListener('submit', async function (e) {
+        // Do not prevent default - Formspree still works
         const form = e.target;
 
         const payload = {
@@ -124,9 +125,9 @@
             body: JSON.stringify(payload)
           });
           const json = await res.json();
-          console.log("✅ SuiteCRM Lead Created:", json);
+          console.log("SuiteCRM Lead Created:", json);
         } catch (err) {
-          console.error("❌ Error sending to CRM:", err);
+          console.error("Error sending to CRM:", err);
         }
       });
     </script>
