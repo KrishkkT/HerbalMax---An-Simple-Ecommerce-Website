@@ -434,19 +434,18 @@
     </section>
 
     <script>
-        // Form Submission Handler
         document.getElementById('orderForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const submitButton = this.querySelector('button[type="submit"]');
             const originalHTML = submitButton.innerHTML;
 
-            // Show spinner
             submitButton.innerHTML = '<div class="spinner"></div> પ્રોસેસિંગ...';
             submitButton.disabled = true;
             submitButton.classList.add('loading');
 
             const form = e.target;
+
             const firstName = form.first_name.value.trim();
             const lastName = form.last_name.value.trim();
             const phone = form.phone.value.trim();
@@ -455,48 +454,45 @@
             const product = form.product.value;
             const offer_price = form.offer_price.value;
 
-            // Set status based on product
-            let status = "";
-            if (product.toLowerCase().includes("shilajit")) {
-                status = "Shilajit_New_Order";
-            } else {
-                status = "Keto_New_Order";
+            // Basic validation
+            if (!firstName || !lastName || !phone || !address) {
+                alert("મહેરબાની કરીને તમામ જરૂરી ફીલ્ડ્સ ભરો!");
+                submitButton.innerHTML = originalHTML;
+                submitButton.disabled = false;
+                submitButton.classList.remove('loading');
+                return;
             }
+
+            // Status based on product
+            const status = product.toLowerCase().includes("shilajit") ? "Shilajit_New_Order" : "Keto_New_Order";
 
             const payload = {
                 first_name: firstName,
                 last_name: lastName,
                 phone,
                 address,
-                pincode,
+                pincode: pincode || "-", // fallback if empty
                 product,
                 offer_price,
                 status
             };
 
             try {
-                // Send to CRM
                 const res = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
+
                 const json = await res.json();
                 console.log("SuiteCRM Lead Created:", json);
 
-                // Backup send to Formspree
-                await fetch(form.action, {
-                    method: "POST",
-                    body: new FormData(form),
-                    headers: { "Accept": "application/json" }
-                });
-
-                // Success
                 submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
                 submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
 
                 setTimeout(() => {
-                    alert("✅ તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે!\n\n🎉 અભિનંદન! તમે ₹1,280 બચાવ્યા છે.\n\n📞 અમે 24 કલાકમાં તમારી સાથે સંપર્ક કરીશું.\n\n📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.\n\n💪 30 દિવસમાં 10+ કિલો વજન ઘટાડવાની તૈયારી કરો!");
+                    alert("✅ તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે!\n📞 અમે 24 કલાકમાં તમારી સાથે સંપર્ક કરીશું.\n📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.");
+
                     form.reset();
                     submitButton.innerHTML = originalHTML;
                     submitButton.style.background = '';
@@ -504,8 +500,15 @@
                     submitButton.classList.remove('loading');
                 }, 2000);
 
+                // Backup Formspree submission
+                await fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: { "Accept": "application/json" }
+                });
+
             } catch (err) {
-                console.error("Error sending:", err);
+                console.error("Error sending to CRM:", err);
                 submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ફરી પ્રયાસ કરો';
                 submitButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
 
@@ -517,6 +520,7 @@
                 }, 3000);
             }
         });
+
     </script>
 
 </body>
