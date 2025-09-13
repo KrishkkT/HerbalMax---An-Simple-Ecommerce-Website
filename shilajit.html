@@ -186,64 +186,43 @@
       </div>
     </div>
   </section>
-  <!-- Order Section -->
+   <!-- Order Section -->
   <section class="order-section" id="order">
     <div class="container">
-      <div class="order-container">
-        <div class="order-header">
-          <h2>હવે જ ઓર્ડર કરો</h2>
-          <p>50% છૂટ સાથે - આ મર્યાદિત સમય ઓફર ટૂંક સમયમાં સમાપ્ત થશે</p>
-        </div>
-        <form id="orderForm" method="POST" action="https://formspree.io/f/xnnbvzpp">
-          <!-- Hidden fields -->
-          <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Shilajit Capsule">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="product" value="Herbal Max Plus - Shilajit Capsule">
-          <input type="hidden" name="offer_price" value="1280">
-          <input type="hidden" name="original_price" value="2560">
+      <form id="orderForm" method="POST" action="https://formspree.io/f/xnnbvzpp">
+        <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Shilajit Capsule">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="product" value="Herbal Max Plus - Shilajit Capsule">
+        <input type="hidden" name="offer_price" value="1280">
+        <input type="hidden" name="original_price" value="2560">
 
-          <div class="form-group">
-            <label class="form-label">પ્રથમ નામ / First Name *</label>
-            <input type="text" name="first_name" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">અંતિમ નામ / Last Name *</label>
-            <input type="text" name="last_name" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">મોબાઈલ નંબર / Phone Number *</label>
-            <input type="tel" name="phone" class="form-input" maxlength="10" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">સંપૂર્ણ સરનામું / Full Address *</label>
-            <textarea name="address" class="form-input form-textarea" rows="3" required
-              placeholder="ઘર નંબર, વિસ્તાર, શહેર, રાજ્ય સાથે સંપૂર્ણ સરનામું લખો..."></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">પિનકોડ / Pincode (વૈકલ્પિક)</label>
-            <input type="number" name="pincode" class="form-input" maxlength="6">
-          </div>
+        <label>પ્રથમ નામ / First Name *</label>
+        <input type="text" name="first_name" required>
 
-          <button type="submit" class="submit-button">
-            <i class="fas fa-lock"></i> ઓર્ડર કરો - ₹1,280 (50% છૂટ સાથે)
-          </button>
-          <div class="security-note">
-            <i class="fas fa-shield-alt"></i>
-            <span>100% સુરક્ષિત અને ગોપનીય ઓર્ડરિંગ</span>
-          </div>
-        </form>
-      </div>
+        <label>અંતિમ નામ / Last Name *</label>
+        <input type="text" name="last_name" required>
+
+        <label>મોબાઈલ નંબર / Phone Number *</label>
+        <input type="tel" name="phone" maxlength="10" required>
+
+        <label>સંપૂર્ણ સરનામું / Full Address *</label>
+        <textarea name="address" rows="3" required placeholder="ઘર નંબર, વિસ્તાર, શહેર, રાજ્ય સાથે સરનામું લખો..."></textarea>
+
+        <label>પિનકોડ / Pincode (વૈકલ્પિક)</label>
+        <input type="number" name="pincode" maxlength="6">
+
+        <button type="submit">ઓર્ડર કરો - ₹1,280</button>
+      </form>
     </div>
   </section>
 
   <script>
-    document.getElementById('orderForm').addEventListener('submit', async function (e) {
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const submitButton = this.querySelector('button[type="submit"]');
-      const originalHTML = submitButton.innerHTML;
-      submitButton.innerHTML = '<div class="spinner"></div> પ્રોસેસિંગ...';
+      const originalText = submitButton.innerHTML;
+      submitButton.innerHTML = 'પ્રોસેસિંગ...';
       submitButton.disabled = true;
-      submitButton.classList.add('loading');
 
       const form = e.target;
       const payload = {
@@ -257,38 +236,21 @@
       };
 
       try {
-        const res = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
+        const res = await fetch("lead-proxy.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
         const json = await res.json();
-        console.log("SuiteCRM Lead Created:", json);
-
-        submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
-        submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-
-        setTimeout(() => {
-          alert("✅ તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે!\n\n🎉 અભિનંદન! તમે ₹1,280 બચાવ્યા છે.\n\n📞 અમે 24 કલાકમાં вашей સાથે સંપર્ક કરીશું.\n\n📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.");
-          form.reset();
-          submitButton.innerHTML = originalHTML;
-          submitButton.style.background = '';
-          submitButton.disabled = false;
-          submitButton.classList.remove('loading');
-        }, 2000);
+        console.log("CRM Response:", json);
+        submitButton.innerHTML = 'ઓર્ડર સફળ!';
+        setTimeout(() => { form.reset(); submitButton.innerHTML = originalText; submitButton.disabled = false; }, 2000);
       } catch (err) {
-        console.error("Error sending to CRM:", err);
-        submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ફરી પ્રયાસ કરો';
-        submitButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-        setTimeout(() => {
-          submitButton.innerHTML = originalHTML;
-          submitButton.style.background = '';
-          submitButton.disabled = false;
-          submitButton.classList.remove('loading');
-        }, 3000);
+        console.error(err);
+        submitButton.innerHTML = 'ફરી પ્રયાસ કરો';
+        setTimeout(() => { submitButton.innerHTML = originalText; submitButton.disabled = false; }, 3000);
       }
 
-      // Formspree fallback submission
       setTimeout(() => { form.submit(); }, 1000);
     });
   </script>
