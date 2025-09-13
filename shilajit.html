@@ -106,28 +106,33 @@
     </form>
 
     <script>
-      document.getElementById('orderForm').addEventListener('submit', function(e){
-  const form = e.target;
+      document.getElementById('orderForm').addEventListener('submit', function (e) {
+        // Optional: prevent default if you want SuiteCRM first
+        // e.preventDefault();
 
-  const payload = {
-    first_name: form.first_name.value,
-    last_name: form.last_name.value,
-    phone: form.phone.value,
-    address: form.address.value,
-    pincode: form.pincode.value,
-    product: form.product.value,
-    offer_price: form.offer_price.value,
-    original_price: form.original_price.value
-  };
+        const form = e.target;
 
-  // Fire and forget
-  fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  }).then(res => res.json()).then(json => console.log(json))
-    .catch(err => console.error(err));
-});
+        const payload = {
+          first_name: form.first_name.value,
+          last_name: form.last_name.value,
+          phone: form.phone.value,
+          address: form.address.value,
+          pincode: form.pincode.value,
+          product: form.product.value,
+          offer_price: form.offer_price.value,
+          original_price: form.original_price.value
+        };
+
+        // Fire to SuiteCRM
+        fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(res => res.json())
+          .then(json => console.log("CRM Lead Created:", json))
+          .catch(err => console.error(err));
+      });
+
 
     </script>
 
