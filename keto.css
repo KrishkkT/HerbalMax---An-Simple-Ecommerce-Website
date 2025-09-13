@@ -764,17 +764,53 @@
             line-height: 1.6;
         }
 
-        .form-group {
-            margin-bottom: 24px;
-        }
+       /* Keep same width as other inputs */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* ensures full width like other fields */
+}
 
-        .form-label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+/* For inputs side by side */
+.form-row {
+  display: flex;
+  gap: 15px; /* space between first and last name */
+}
+
+.form-row .form-group {
+  flex: 1; /* each input takes equal width */
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Inputs */
+.form-group input[type="text"] {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 100%; /* ensures input fills its container */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
 
         .form-input {
             width: 100%;
