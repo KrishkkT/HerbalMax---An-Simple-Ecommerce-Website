@@ -413,6 +413,7 @@
                 const res = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
+                    mode: 'cors',
                     body: JSON.stringify(payload)
                 });
                 const json = await res.json();
