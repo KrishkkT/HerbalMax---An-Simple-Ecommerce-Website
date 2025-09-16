@@ -11,19 +11,19 @@ window.addEventListener('scroll', () => {
 });
 
 // Animate elements on scroll
-const animatedElements = document.querySelectorAll('.animate-on-scroll');
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(".animate-on-scroll");
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-        observer.unobserve(entry.target); // animate once
+        entry.target.classList.add("visible");
       }
     });
-  },
-  { threshold: 0.2 }
-);
+  }, { threshold: 0.2 });
+
+  elements.forEach(el => observer.observe(el));
+});
 
 animatedElements.forEach((el) => observer.observe(el));
 

@@ -7,11 +7,10 @@
   <title>Herbal Max Plus - હોમ</title>
 
   <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
 
-  <!-- Main CSS -->
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
 
   <!-- Favicon -->
@@ -25,82 +24,71 @@
 </head>
 
 <body>
-  <!-- Background Decoration -->
   <div class="bg-decoration"></div>
 
   <!-- Header -->
   <header class="header" id="header">
-    <div class="container header-flex">
-      <a href="index.html" class="logo">🌿 Herbal Max Plus</a>
-      <nav class="nav">
-        <ul>
-          <li><a href="#hero">હોમ</a></li>
-          <li><a href="#doctor">ડૉક્ટરની સલાહ</a></li>
-          <li><a href="#products">પ્રોડક્ટ્સ</a></li>
-          <li><a href="#customers">ગ્રાહકો</a></li>
-          <li><a href="#footer">સંપર્ક</a></li>
-        </ul>
-      </nav>
+    <div class="container header-content">
+      <h1>🌿 Herbal Max Plus <span class="gujarati">/ હર્બલ મેક્સ પ્લ્સ</span></h1>
+      <p>પ્રાકૃતિક અને આયુર્વેદિક આરોગ્ય પ્રોડક્ટ્સ</p>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero fade-in" id="hero">
-    <div class="container">
-      <h1>તમારા આરોગ્ય માટે કુદરતી ઉકેલ</h1>
-      <p>100% હર્બલ અને સલામત પ્રોડક્ટ્સ - લિંગની લંબાઈ, સ્ટેમિના, વજન ઘટાડવા, તાકાત વધારવા અને
+  <section class="hero animate-on-scroll">
+    <div class="overlay"></div>
+    <div class="container hero-content">
+      <h2>તમારા આરોગ્ય માટે કુદરતી ઉકેલ</h2>
+      <p>💚 100% હર્બલ અને સલામત પ્રોડક્ટ્સ - લિંગની લંબાઈ, મોટાઈ અને સેક્સ ટાઈમિંગ વધારવા, વજન ઘટાડવા, તાકાત વધારવા અને
         ઇમ્યુનિટી માટે શ્રેષ્ઠ.</p>
-      <a href="#products" class="btn-primary"><i class="fas fa-arrow-down"></i> પ્રોડક્ટ્સ જુઓ</a>
+      <a href="#products" class="btn hero-btn">અમારા પ્રોડક્ટ્સ જુઓ</a>
     </div>
   </section>
 
-  <!-- Customers -->
-  <section class="customer-celebration animate-on-scroll" id="customers">
+
+  <!-- Celebration -->
+  <section class="customer-celebration animate-on-scroll">
     <div class="container">
       <h2>🎉 60,000+ ખુશ ગ્રાહકો 🎉</h2>
       <p>✨ અમારા પર વિશ્વાસ રાખનાર હજારો લોકોમાં જોડાઓ ✨</p>
     </div>
   </section>
 
-  <!-- Doctor -->
-  <section class="doctor-section animate-on-scroll" id="doctor">
-    <div class="container doctor-flex">
+  <!-- Doctor Section -->
+  <section class="doctor-section animate-on-scroll">
+    <div class="doctor-content">
       <div class="doctor-text">
-        <h2>ડૉક્ટરની ભલામણ</h2>
-        <p><b>હું ડૉક્ટર રાહુલ</b>, અને Herbal Max Plus ને સરકાર તરફથી પ્રમાણપત્ર મળેલું છે.
-          આ પ્રોડક્ટ વૈજ્ઞાનિક રીતે સાબિત છે અને દર્દીઓએ નોંધપાત્ર પરિણામો જોયા છે.</p>
-        <ul class="benefits-list">
-          <li><i class="fas fa-check-circle"></i> સાઇઝ અને સ્ટેમિના વધારો</li>
-          <li><i class="fas fa-check-circle"></i> મફત ડિલિવરી</li>
-          <li><i class="fas fa-check-circle"></i> 100% હર્બલ અને સલામત</li>
-        </ul>
+        <p><b>ડૉક્ટર રાહુલ કહે છે:</b> Herbal Max Plus શિશ્નની સાઇઝ વધારવા, સંભોગનો સમયગાળો વધારવા અને તાકાત વધારવા માટે
+          વૈજ્ઞાનિક રીતે સાબિત થયેલું છે.
+          સરકારે સર્ટિફાઈડ કરેલું હોવાથી તેનો ઉપયોગ સંપૂર્ણપણે સલામત છે.</p>
       </div>
       <div class="certificate-container">
         <img src="img/img6_cert.jpg" alt="Herbal Products Certificate" class="hero-img">
-        <div class="certificate-badge">
-          <i class="fas fa-certificate"></i> Certified
-        </div>
+        <span class="certificate-badge"><i class="fas fa-certificate"></i> Certified</span>
       </div>
     </div>
   </section>
 
   <!-- Products -->
-  <section class="products-section animate-on-scroll" id="products">
-    <div class="container">
+  <section class="products-section animate-on-scroll">
+    <div id="products" class="container">
       <h2>અમારા પ્રોડક્ટ્સ</h2>
-      <div class="products-grid">
+      <div class="products">
         <div class="product-card">
           <img src="img/shilajitmain.jpg" alt="Shilajit Capsule">
           <h3>Shilajit Capsule</h3>
           <p>શક્તિ અને સ્ટેમિના માટે શ્રેષ્ઠ</p>
-          <a href="shilajit.html" class="btn"><i class="fas fa-arrow-right"></i> જુઓ</a>
+          <a href="shilajit.html" class="btn">
+            <i class="fas fa-arrow-right"></i> જુઓ
+          </a>
         </div>
-
         <div class="product-card">
           <img src="img/ketomain.jpg" alt="Keto Go Slim">
           <h3>Keto Go Slim</h3>
           <p>વજન ઘટાડવા માટે શ્રેષ્ઠ ઉપાય</p>
-          <a href="keto-go-slim.html" class="btn"><i class="fas fa-arrow-right"></i> જુઓ</a>
+          <a href="keto-go-slim.html" class="btn">
+            <i class="fas fa-arrow-right"></i> જુઓ
+          </a>
         </div>
       </div>
     </div>
@@ -114,9 +102,7 @@
         <p>પ્રાકૃતિક અને આયુર્વેદિક આરોગ્ય પ્રોડક્ટ્સ</p>
       </div>
       <div>
-        <h4>સંપર્ક</h4>
-        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-        <p><i class="fas fa-envelope"></i> support@herbalmaxplus.com</p>
+        <p><i class="fas fa-envelope"></i> herbalmax2244@gmail.com</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -127,4 +113,5 @@
   <!-- JS -->
   <script src="main.js"></script>
 </body>
+
 </html>
