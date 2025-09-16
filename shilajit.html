@@ -334,7 +334,7 @@
     </section>
 
     <script>
-         // Image Gallery with Auto-scroll
+        // Image Gallery with Auto-scroll
         const images = [
             "img/img13.jpg",
             "img/img14.jpg",
@@ -430,14 +430,25 @@
             submitButton.classList.add('loading');
 
             const form = e.target;
+            const product = form.product.value;
+
+            // Map product → status
+            let status = "New";
+            if (product.toLowerCase().includes("keto")) {
+                status = "Keto_New_Order";
+            } else if (product.toLowerCase().includes("shilajit")) {
+                status = "Shilajit_New_Order";
+            }
+
             const payload = {
                 first_name: form.first_name.value,
                 last_name: form.last_name.value || '',
                 phone: form.phone.value,
                 address: form.address.value,
                 pincode: form.pincode.value,
-                product: form.product.value,
-                offer_price: form.offer_price.value
+                product: product,
+                offer_price: form.offer_price.value,
+                status: status
             };
 
             try {
@@ -447,6 +458,9 @@
                     mode: 'cors',
                     body: JSON.stringify(payload)
                 });
+
+                if (!res.ok) throw new Error("Bad response from CRM");
+
                 const json = await res.json();
 
                 // Success state
@@ -456,7 +470,6 @@
                 setTimeout(() => {
                     alert("✅ તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે!\n\n🎉 અભિનંદન! તમે ₹1,280 બચાવ્યા છે.\n\n📞 અમે 24 કલાકમાં તમારી સાથે સંપર્ક કરીશું.\n\n📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.");
 
-                    // Reset form
                     form.reset();
                     submitButton.innerHTML = originalHTML;
                     submitButton.style.background = '';
@@ -477,13 +490,14 @@
                     submitButton.disabled = false;
                     submitButton.classList.remove('loading');
                 }, 3000);
-            }
 
-            /* Continue with Formspree submission for backup
-            setTimeout(() => {
-                form.submit();
-            }, 1000);*/
+                // Fallback: Continue with Formspree submission
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            }
         });
+
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
