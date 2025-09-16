@@ -21,7 +21,7 @@ A minimal **Herbal Max Plus** e-commerce landing page that allows customers to p
 
 ## Demo
 
-- **Live frontend demo**: `https://yourusername.github.io/HerbalMaxPlus-Website/`  
+- **Live frontend demo**: `https://herbalmaxplus.shop`  
 - Note: CRM integration requires server with PHP; Formspree works on static hosting.
 
 ---
@@ -63,7 +63,7 @@ A minimal **Herbal Max Plus** e-commerce landing page that allows customers to p
 1. **Clone the repository**:
 
   ```bash
-  git clone https://github.com/yourusername/HerbalMaxPlus-Website.git
+  git clone https://github.com/krishkkt/HerbalMax---An-Simple-Ecommerce-Website.git
   cd HerbalMaxPlus-Website
   ```
 
@@ -141,6 +141,3 @@ A minimal **Herbal Max Plus** e-commerce landing page that allows customers to p
 ![CRM Lead View](img/crm-lead-view.jpg)  
 *Detailed view of a single lead received from the website.*
 
-### g. Optional: CRM Reports or Analytics
-![CRM Reports](img/crm-reports.jpg)  
-*Optional: Reports or analytics showing order trends and lead performance.*
