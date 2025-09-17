@@ -18,6 +18,26 @@
     <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1724565871525924');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1724565871525924&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -116,13 +136,16 @@
                     </div>
                     <div class="thumbnail-container" id="thumbnailContainer">
                         <div class="thumbnail active" data-index="0">
-                            <img src="img/img13.jpg" alt="Product Image 1">
+                            <img src="img/shilajitmain2.jpg" alt="Product Image 1">
+                        </div>
+                        <div class="thumbnail active" data-index="0">
+                            <img src="img/img13.jpg" alt="Product Image 2">
                         </div>
                         <div class="thumbnail" data-index="1">
-                            <img src="img/img14.jpg" alt="Product Image 2">
+                            <img src="img/img14.jpg" alt="Product Image 3">
                         </div>
                         <div class="thumbnail" data-index="2">
-                            <img src="img/img15.jpg" alt="Product Image 3">
+                            <img src="img/img15.jpg" alt="Product Image 4">
                         </div>
                     </div>
                 </div>
@@ -311,7 +334,7 @@
             <div class="testimonials-container">
                 <div class="testimonial">
                     <div class="testimonial-content">
-                        માત્ર 30 દિવસમાં મારો કદ 18.2 સેમીથી વધીને 23.4 સેમી થઈ ગયો! હવે હું વધુ આત્મવિશ્વાસ અનુભવું છું
+                        માત્ર 30 દિવસમાં મારો કદ 10.1 સેમીથી વધીને 16.1 સેમી થઈ ગયો! હવે હું વધુ આત્મવિશ્વાસ અનુભવું છું
                         અને મારી પત્ની પણ ખુશ છે. આ પ્રોડક્ટ ખરેખર કામ કરે છે અને મારા જીવનમાં ક્રાંતિ લાવી દીધી.
                     </div>
                     <div class="testimonial-author">
@@ -345,7 +368,7 @@
                     <div class="testimonial-author">
                         <div class="author-avatar">M</div>
                         <div class="author-info">
-                            <div class="name">મીત પતેલ</div>
+                            <div class="name">મીત પટેલ</div>
                             <div class="location">વલસાડ, ગુજરાત</div>
                         </div>
                     </div>
@@ -439,6 +462,7 @@
 
         // Image Gallery with Auto-scroll
         const images = [
+            "img/shilajitmain2.jpg",
             "img/img13.jpg",
             "img/img14.jpg",
             "img/img15.jpg"
