@@ -87,15 +87,11 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <span class="rating-text">4.8/5 • <span class="rating-count">2,150+</span> સફળ ગ્રાહકો</span>
+                        <span class="rating-text">4.9/5 • <span class="rating-count">1,247+</span> સંતુષ્ટ
+                            ગ્રાહકો</span>
                     </div>
 
                     <div class="price-section">
-                        <div class="offer-timer">
-                            <div class="timer-badge">લિમિટેડ ટાઈમ ઓફર</div>
-                            <div class="countdown" id="countdown">23:59:45</div>
-                        </div>
-
                         <div class="price-display">
                             <span class="current-price">₹1,280</span>
                             <span class="original-price">₹2,560</span>
@@ -107,7 +103,7 @@
                     <div class="cta-container">
                         <button class="cta-button"
                             onclick="document.getElementById('orderForm').scrollIntoView({behavior: 'smooth'})">
-                            <i class="fas fa-weight"></i> હવે ઓર્ડર કરો
+                            <i class="fas fa-cart-plus"></i> હવે ઓર્ડર કરો
                         </button>
                         <div class="security-badges">
                             <div class="security-badge">
@@ -272,6 +268,104 @@
         </div>
     </section>
 
+    <!-- Order Section -->
+    <section class="order-section" id="order">
+        <div class="container">
+            <div class="order-container">
+                <div class="order-header">
+                    <h2>હવે જ ઓર્ડર કરો</h2>
+                    <p>50% છૂટ સાથે - આ મર્યાદિત સમય ઓફર ટૂંક સમયમાં સમાપ્ત થશે</p>
+                </div>
+
+                <!-- Enhanced Timer Section -->
+                <div class="timer-section">
+                    <div class="timer-content">
+                        <div class="timer-title">🔥 લિમિટેડ ટાઈમ ઓફર</div>
+                        <div class="countdown-display" id="countdown">59:45:23</div>
+                        <div class="timer-subtitle">આ ઓફર ટૂંક સમયમાં સમાપ્ત થશે!</div>
+                    </div>
+                </div>
+
+                <form id="orderForm" method="POST" action="https://formspree.io/f/xeolvkeo">
+                    <!-- Hidden fields -->
+                    <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Keto Go Slim">
+                    <input type="hidden" name="product" value="Keto Go Slim">
+                    <input type="hidden" name="offer_price" value="1280">
+                    <input type="hidden" name="original_price" value="2560">
+
+                    <div class="form-group">
+                        <label class="form-label">પ્રથમ નામ / First Name *</label>
+                        <input type="text" name="first_name" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">અંતિમ નામ / Last Name *</label>
+                        <input type="text" name="last_name" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">મોબાઈલ નંબર / Phone Number *</label>
+                        <input type="tel" name="phone" class="form-input" pattern="[0-9]{10}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">સંપૂર્ણ સરનામું / Full Address *</label>
+                        <textarea name="address" class="form-input form-textarea" rows="3" required
+                            placeholder="ઘર નંબર, વિસ્તાર, શહેર, રાજ્ય સાથે સંપૂર્ણ સરનામું લખો..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">પિનકોડ / Pincode (વૈકલ્પિક)</label>
+                        <input type="number" name="pincode" class="form-input" pattern="\d{6}">
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-lock"></i> ઓર્ડર કરો - ₹1,280 (50% છૂટ સાથે)
+                    </button>
+
+                    <!-- 🔴 Gujarati Instruction -->
+                    <div class="payment-note">
+                        🔴 નોંધ: તમને હવે પૈસા ચૂકવવાની જરૂર નથી. ફક્ત ઉપરનો ફોર્મ ભરો અને બટન દબાવો.
+                        માલિક તમારી સાથે સંપર્ક કરશે ચુકવણી, ડિલિવરી અને પ્રોડક્ટ ઉપયોગ અંગે ચર્ચા કરવા માટે.
+                    </div>
+                    <br>
+                    <div class="security-note">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% સુરક્ષિત અને ગોપનીય ઓર્ડરિંગ</span>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Review Counter Section -->
+    <section class="review-counter-section">
+        <div class="container">
+            <div class="review-stars-large">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="review-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="reviewCount">1,247</span>
+                    <span class="stat-label">સંતુષ્ટ ગ્રાહકો</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9</span>
+                    <span class="stat-label">એવરેજ રેટિંગ</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">97%</span>
+                    <span class="stat-label">પોઝિટિવ રિઝલ્ટ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials Section -->
     <section class="testimonials-section" id="testimonials">
         <div class="container">
@@ -380,69 +474,75 @@
         </div>
     </section>
 
-    <!-- Order Section -->
-    <section class="order-section" id="order">
-        <div class="container">
-            <div class="order-container">
-                <div class="order-header">
-                    <h2>હવે જ ઓર્ડર કરો</h2>
-                    <p>50% છૂટ સાથે - આ મર્યાદિત સમય ઓફર ટૂંક સમયમાં સમાપ્ત થશે</p>
-                </div>
-
-                <form id="orderForm" method="POST" action="https://formspree.io/f/xeolvkeo">
-                    <!-- Hidden fields -->
-                    <input type="hidden" name="_subject" value="🟢 New Order - Herbal Max Plus - Keto Go Slim">
-                    <input type="hidden" name="product" value="Keto Go Slim">
-                    <input type="hidden" name="offer_price" value="1280">
-                    <input type="hidden" name="original_price" value="2560">
-
-                    <div class="form-group">
-                        <label class="form-label">પ્રથમ નામ / First Name *</label>
-                        <input type="text" name="first_name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">અંતિમ નામ / Last Name *</label>
-                        <input type="text" name="last_name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">મોબાઈલ નંબર / Phone Number *</label>
-                        <input type="tel" name="phone" class="form-input" pattern="[0-9]{10}" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">સંપૂર્ણ સરનામું / Full Address *</label>
-                        <textarea name="address" class="form-input form-textarea" rows="3" required
-                            placeholder="ઘર નંબર, વિસ્તાર, શહેર, રાજ્ય સાથે સંપૂર્ણ સરનામું લખો..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">પિનકોડ / Pincode (વૈકલ્પિક)</label>
-                        <input type="number" name="pincode" class="form-input" pattern="\d{6}">
-                    </div>
-
-                    <button type="submit" class="submit-button">
-                        <i class="fas fa-lock"></i> ઓર્ડર કરો - ₹1,280 (50% છૂટ સાથે)
-                    </button>
-
-                    <!-- 🔴 Gujarati Instruction -->
-                    <div class="payment-note">
-                        🔴 નોંધ: તમને હવે પૈસા ચૂકવવાની જરૂર નથી. ફક્ત ઉપરનો ફોર્મ ભરો અને બટન દબાવો.
-                        માલિક તમારી સાથે સંપર્ક કરશે ચુકવણી, ડિલિવરી અને પ્રોડક્ટ ઉપયોગ અંગે ચર્ચા કરવા માટે.
-                    </div>
-                    <br>
-                    <div class="security-note">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>100% સુરક્ષિત અને ગોપનીય ઓર્ડરિંગ</span>
-                    </div>
-                </form>
-
+    <!-- Success Popup -->
+    <div class="success-popup" id="successPopup">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-check"></i>
             </div>
+            <div class="popup-title">અભિનંદન! ઓર્ડર સફળ!</div>
+            <div class="popup-message">
+                તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે. અમે 24 કલાકમાં તમારી સાથે સંપર્ક કરીશું.<br>
+                📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.
+            </div>
+            <div class="popup-savings">તમે ₹1,280 બચાવ્યા છે!</div>
         </div>
-    </section>
+    </div>
 
     <script>
+        // Persistent 1-hour countdown timer
+        function initializeTimer() {
+            const TIMER_KEY = 'shilajit_timer_end';
+            const TIMER_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+
+            let endTime = localStorage.getItem(TIMER_KEY);
+
+            if (!endTime || new Date().getTime() > parseInt(endTime)) {
+                // Timer expired or doesn't exist, start new timer
+                endTime = new Date().getTime() + TIMER_DURATION;
+                localStorage.setItem(TIMER_KEY, endTime.toString());
+            }
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const timeLeft = parseInt(endTime) - now;
+
+                if (timeLeft <= 0) {
+                    // Timer expired, reset
+                    endTime = new Date().getTime() + TIMER_DURATION;
+                    localStorage.setItem(TIMER_KEY, endTime.toString());
+                    updateTimer();
+                    return;
+                }
+
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').textContent =
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // Animated counter for reviews
+        function animateCounter() {
+            const counter = document.getElementById('reviewCount');
+            const target = 1247;
+            let current = 1000;
+            const increment = 3;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.textContent = current.toLocaleString();
+            }, 50);
+        }
+
         // Image Gallery with Auto-scroll
         const images = [
             "img/img10.jpg",
@@ -456,7 +556,6 @@
         const imageCounter = document.getElementById('imageCounter');
         const thumbnails = document.querySelectorAll('.thumbnail');
 
-        // Auto-scroll images every 4 seconds
         function autoScrollImages() {
             currentImageIndex = (currentImageIndex + 1) % images.length;
             updateImage();
@@ -467,7 +566,6 @@
             mainImage.src = images[currentImageIndex];
             imageCounter.textContent = `${currentImageIndex + 1}/4`;
 
-            // Update active thumbnail
             thumbnails.forEach((thumb, index) => {
                 thumb.classList.toggle('active', index === currentImageIndex);
             });
@@ -477,45 +575,16 @@
             }, 500);
         }
 
-        // Manual image selection
         thumbnails.forEach((thumbnail, index) => {
             thumbnail.addEventListener('click', () => {
                 currentImageIndex = index;
                 updateImage();
-                // Reset auto-scroll timer
                 clearInterval(autoScrollTimer);
                 autoScrollTimer = setInterval(autoScrollImages, 4000);
             });
         });
 
-        // Start auto-scroll
         let autoScrollTimer = setInterval(autoScrollImages, 4000);
-
-        // Countdown Timer
-        function startCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            let hours = 23, minutes = 59, seconds = 59;
-
-            setInterval(() => {
-                seconds--;
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        if (hours < 0) {
-                            hours = 23;
-                        }
-                    }
-                }
-
-                countdownElement.textContent =
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-
-        startCountdown();
 
         // Header scroll effect
         window.addEventListener('scroll', () => {
@@ -533,6 +602,8 @@
 
             const submitButton = this.querySelector('button[type="submit"]');
             const originalHTML = submitButton.innerHTML;
+            const successMessage = document.getElementById('successMessage');
+            const popup = document.getElementById('successPopup');
 
             // Show loading state
             submitButton.innerHTML = '<div class="spinner"></div> પ્રોસેસિંગ...';
@@ -540,14 +611,24 @@
             submitButton.classList.add('loading');
 
             const form = e.target;
+            const product = form.product.value;
+
+            let status = "New";
+            if (product.toLowerCase().includes("keto")) {
+                status = "Keto_New_Order";
+            } else if (product.toLowerCase().includes("shilajit")) {
+                status = "Shilajit_New_Order";
+            }
+
             const payload = {
                 first_name: form.first_name.value,
                 last_name: form.last_name.value || '',
                 phone: form.phone.value,
                 address: form.address.value,
                 pincode: form.pincode.value,
-                product: form.product.value,
-                offer_price: form.offer_price.value
+                product: product,
+                offer_price: form.offer_price.value,
+                status: status
             };
 
             try {
@@ -557,16 +638,28 @@
                     mode: 'cors',
                     body: JSON.stringify(payload)
                 });
+
+                if (!res.ok) throw new Error("Bad response from CRM");
+
                 const json = await res.json();
 
                 // Success state
                 submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
                 submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
 
-                setTimeout(() => {
-                    alert("✅ તમારો ઓર્ડર સફળતાપૂર્વક મોકલાયો છે!\n\n🎉 અભિનંદન! તમે ₹1,280 બચાવ્યા છે.\n\n📞 અમે 24 કલાકમાં તમારી સાથે સંપર્ક કરીશું.\n\n📦 તમારો ઓર્ડર 3-5 દિવસમાં પહોંચાડવામાં આવશે.");
+                // Show success message
+                successMessage.classList.add('show');
 
-                    // Reset form
+                // Show popup
+                popup.classList.add('show');
+
+                // Auto-hide popup after 6 seconds
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                }, 6000);
+
+                // Reset form after success
+                setTimeout(() => {
                     form.reset();
                     submitButton.innerHTML = originalHTML;
                     submitButton.style.background = '';
@@ -587,51 +680,19 @@
                     submitButton.disabled = false;
                     submitButton.classList.remove('loading');
                 }, 3000);
+
+                // Fallback: Continue with Formspree submission
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
             }
-
-            /* Continue with Formspree submission for backup
-            setTimeout(() => {
-                form.submit();
-            }, 1000);*/
         });
-
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Initialize functions on page load
+        window.onload = function () {
+            initializeTimer();
+            animateCounter();
+            updateImage();
         };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.benefit-card, .testimonial, .ingredient-card, .usage-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
     </script>
 </body>
 
