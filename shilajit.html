@@ -34,6 +34,19 @@
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1724565871525924');
         fbq('track', 'PageView');
+
+        fbq('track', 'Lead', {
+            content_name: 'Shilajit Capsule',
+            value: 1280,
+            currency: 'INR'
+        });
+
+        fbq('track', 'InitiateCheckout', {
+            content_name: 'Shilajit Capsule',
+            value: 1280,
+            currency: 'INR'
+        });
+
     </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1724565871525924&ev=PageView&noscript=1" /></noscript>
