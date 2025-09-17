@@ -642,34 +642,34 @@
                     body: JSON.stringify(payload)
                 });
 
-                console.log("CRM response status:", res.status);
-                const text = await res.text();
-                console.log("CRM raw response:", text);
+                console.log("CRM response status:", res.status); // OK
 
-
-                if (!res.ok) throw new Error("Bad response from CRM");
-
+                // Read the response once
                 const json = await res.json();
+                console.log("CRM response JSON:", json);
 
-                // Success state
-                submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
-                submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                if (json.status === "success") {
+                    // Success state
+                    submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
+                    submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                    popup.classList.add('show');
 
-                // Show success message (persistent until refresh)
-                successMessage.classList.add('show');
+                    setTimeout(() => {
+                        popup.classList.remove('show');
+                    }, 6000);
 
-                // Show popup (auto-hide after 6s)
-                popup.classList.add('show');
-                setTimeout(() => popup.classList.remove('show'), 6000);
-
-                // Keep success button state (don’t reset to original)
-                submitButton.disabled = false;
-                submitButton.classList.remove('loading');
+                    form.reset();
+                    submitButton.innerHTML = originalHTML;
+                    submitButton.style.background = '';
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('loading');
+                } else {
+                    throw new Error("CRM returned failure");
+                }
 
             } catch (err) {
                 console.error("Error sending to CRM:", err);
 
-                // Error state
                 submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ફરી પ્રયાસ કરો';
                 submitButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
 
@@ -680,17 +680,21 @@
                     submitButton.classList.remove('loading');
                 }, 3000);
 
-                // Fallback: send to Formspree with FormData
-                try {
-                    const formData = new FormData(form);
-                    await fetch(form.action, {
-                        method: "POST",
-                        body: formData,
-                        headers: { "Accept": "application/json" }
-                    });
-                } catch (fsErr) {
-                    console.error("Formspree fallback also failed:", fsErr);
-                }
+                // Fallback
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            }
+            // Fallback: send to Formspree with FormData
+            try {
+                const formData = new FormData(form);
+                await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { "Accept": "application/json" }
+                });
+            } catch (fsErr) {
+                console.error("Formspree fallback also failed:", fsErr);
             }
         });
 
