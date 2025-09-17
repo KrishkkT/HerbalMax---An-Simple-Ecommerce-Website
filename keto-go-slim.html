@@ -323,6 +323,11 @@
                         <i class="fas fa-lock"></i> ઓર્ડર કરો - ₹1,280 (50% છૂટ સાથે)
                     </button>
 
+                    <!-- Success Message (hidden by default) -->
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i> તમારો ઓર્ડર સફળતાપૂર્વક મુકાયો છે!
+                    </div>
+
                     <!-- 🔴 Gujarati Instruction -->
                     <div class="payment-note">
                         🔴 નોંધ: તમને હવે પૈસા ચૂકવવાની જરૂર નથી. ફક્ત ઉપરનો ફોર્મ ભરો અને બટન દબાવો.
@@ -600,7 +605,8 @@
         document.getElementById('orderForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const submitButton = this.querySelector('button[type="submit"]');
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
             const originalHTML = submitButton.innerHTML;
             const successMessage = document.getElementById('successMessage');
             const popup = document.getElementById('successPopup');
@@ -610,9 +616,7 @@
             submitButton.disabled = true;
             submitButton.classList.add('loading');
 
-            const form = e.target;
             const product = form.product.value;
-
             let status = "New";
             if (product.toLowerCase().includes("keto")) {
                 status = "Keto_New_Order";
@@ -635,9 +639,13 @@
                 const res = await fetch("https://crm.herbalmaxplus.shop/lead-proxy.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    mode: 'cors',
                     body: JSON.stringify(payload)
                 });
+
+                console.log("CRM response status:", res.status);
+                const text = await res.text();
+                console.log("CRM raw response:", text);
+
 
                 if (!res.ok) throw new Error("Bad response from CRM");
 
@@ -647,25 +655,16 @@
                 submitButton.innerHTML = '<i class="fas fa-check"></i> ઓર્ડર સફળ!';
                 submitButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
 
-                // Show success message
+                // Show success message (persistent until refresh)
                 successMessage.classList.add('show');
 
-                // Show popup
+                // Show popup (auto-hide after 6s)
                 popup.classList.add('show');
+                setTimeout(() => popup.classList.remove('show'), 6000);
 
-                // Auto-hide popup after 6 seconds
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 6000);
-
-                // Reset form after success
-                setTimeout(() => {
-                    form.reset();
-                    submitButton.innerHTML = originalHTML;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('loading');
-                }, 2000);
+                // Keep success button state (don’t reset to original)
+                submitButton.disabled = false;
+                submitButton.classList.remove('loading');
 
             } catch (err) {
                 console.error("Error sending to CRM:", err);
@@ -681,12 +680,20 @@
                     submitButton.classList.remove('loading');
                 }, 3000);
 
-                // Fallback: Continue with Formspree submission
-                setTimeout(() => {
-                    form.submit();
-                }, 1000);
+                // Fallback: send to Formspree with FormData
+                try {
+                    const formData = new FormData(form);
+                    await fetch(form.action, {
+                        method: "POST",
+                        body: formData,
+                        headers: { "Accept": "application/json" }
+                    });
+                } catch (fsErr) {
+                    console.error("Formspree fallback also failed:", fsErr);
+                }
             }
         });
+
         // Initialize functions on page load
         window.onload = function () {
             initializeTimer();
