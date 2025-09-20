@@ -95,14 +95,14 @@
                             ગ્રાહકો</span>
                     </div>
 
-                    <div class="price-section">
+                    <!-- <div class="price-section">
                         <div class="price-display">
                             <span class="current-price">₹1,280</span>
                             <span class="original-price">₹2,560</span>
                             <span class="discount-badge">50% OFF</span>
                         </div>
                         <div class="savings-text">તમે ₹1,280 બચાવો છો</div>
-                    </div>
+                    </div> -->
 
                     <div class="cta-container">
                         <button class="cta-button"
@@ -246,14 +246,10 @@
                     <input type="hidden" name="offer_price" value="1280">
                     <input type="hidden" name="original_price" value="2560">
 
+                    <!-- Form Fields -->
                     <div class="form-group">
-                        <label class="form-label">પ્રથમ નામ / First Name *</label>
-                        <input type="text" name="first_name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">અંતિમ નામ / Last Name</label>
-                        <input type="text" name="last_name" class="form-input" required>
+                        <label class="form-label">નામ / Name *</label>
+                        <input type="text" name="name" class="form-input" required>
                     </div>
 
                     <div class="form-group">
@@ -403,7 +399,6 @@
                 ઓર્ડર કર્યા બાદ આમારા પ્રતિનિધિ ટૂંક સમયમાં તમને પુષ્ટિ માટે તમારા આપેલા મોબાઈલ નંબર પર ફોન કરશે . તમારો
                 ઓર્ડર ગુપ્ત પેકેજિંગ માં મોકલવા આવશે
             </div>
-            <div class="popup-savings">તમે ₹1,280 બચાવ્યા છે!</div>
         </div>
     </div>
 
@@ -549,8 +544,7 @@
             }
 
             const payload = {
-                first_name: form.first_name.value,
-                last_name: form.last_name.value || '',
+                name: form.name.value,
                 phone: form.phone.value,
                 address: form.address.value,
                 pincode: form.pincode.value,
